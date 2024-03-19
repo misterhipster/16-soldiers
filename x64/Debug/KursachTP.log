@@ -1,0 +1,467 @@
+﻿  main.cpp
+C:\Users\georg\Desktop\KursachTP\Cell.h(19,31): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(21,30): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(21,27): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(74,37): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(74,34): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\GameField.h(103,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(103,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(104,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(104,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(116,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(116,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(117,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(117,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(133,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(133,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(134,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(134,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(144,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(144,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(145,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(145,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(159,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(159,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(160,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(160,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(170,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(170,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(171,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(171,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(186,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(186,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(187,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(187,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(197,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(197,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(198,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(198,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(211,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(211,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(212,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(212,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(222,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(222,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(223,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(223,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(233,86): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(233,53): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(234,96): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(234,58): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(242,91): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(242,58): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(243,104): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(243,62): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(251,88): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(251,54): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(252,88): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(252,54): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(260,88): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(260,54): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(261,96): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(261,58): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(281,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(281,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(282,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(282,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(294,90): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(294,57): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(295,98): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(295,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(301,98): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(301,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(302,106): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(302,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(311,92): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(311,58): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(312,100): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(312,62): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(318,100): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(318,62): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(319,108): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(319,66): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(332,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(332,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(333,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(333,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(348,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(348,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(349,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(349,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(369,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(369,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(370,102): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(370,65): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(411,74): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(411,40): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(412,74): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\georg\Desktop\KursachTP\GameField.h(412,40): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  KursachTP.vcxproj -> C:\Users\georg\Desktop\KursachTP\x64\Debug\KursachTP.exe
