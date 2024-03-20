@@ -5,9 +5,11 @@
 #include "Player.h"
 #include "Bot.h"
 #include "Direction.h"
+#include "TPlaying_Field.h"
 
 void winLost(Player, Bot, sf::RenderWindow&);
-void viewStatistics(Player, Bot, sf::RenderWindow&);
+void viewStatistics(Player, Bot, sf::RenderWindow&, TPlaying_Field);
+int Evaluate(TPlaying_Field);
 
 int main()
 {
@@ -15,6 +17,9 @@ int main()
     GameField gamefield(window);
     Player player(gamefield.getCells(), window);
     Bot bot(gamefield.getCells(), window);
+    TPlaying_Field playingField(&player, &bot); // Передаем указатели на объекты
+
+
 
     // Индекс ячейки, в которую был сделан клик, изначально устанавливаем на -1
     int clickedPlayerCellIndex = -1;
@@ -158,7 +163,7 @@ int main()
             }
         }
 
-        viewStatistics(player, bot, window);
+        viewStatistics(player, bot, window, playingField);
         winLost(player, bot, window);
 
         // Для дебага лучше оставь ))) (я энаю что просто никогда это не сотру :] )
@@ -176,18 +181,18 @@ int main()
 // Определяет побеждает игрок или проигрывает, и заканчивает игру если это необходимо
 void winLost(Player player, Bot bot, sf::RenderWindow& window)
 {
-    if (bot.getCells().size() < 15 || player.getCells().size() <= 0)
+    if (bot.getCells().size() <= 0 || player.getCells().size() <= 0)
     {
         sf::Font font;
         font.loadFromFile("timesnewromanpsmt.ttf");
 
         sf::Text text("Congratulations!", font, 24);;
-        if (bot.getCells().size() <= 16)
+        if (bot.getCells().size() <= 0)
         {
             //text("Congratulations! You win!", font, 24);
             text.setString(text.getString() + " You win!");
         }
-        if (player.getCells().size() < 0)
+        if (player.getCells().size() <= 0)
         {
             //text("Congratulations! You win!", font, 24);
             text.setString(text.getString() + " You win!");
@@ -203,14 +208,15 @@ void winLost(Player player, Bot bot, sf::RenderWindow& window)
     }
 }
 
-void viewStatistics(Player player, Bot bot, sf::RenderWindow& window)
+void viewStatistics(Player player, Bot bot, sf::RenderWindow& window, TPlaying_Field fld)
 {
     sf::Font font;
     // Передаем нашему шрифту файл шрифта (этот шрифт в одной директори с проектом)
     font.loadFromFile("timesnewromanpsmt.ttf");
 
     // Создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
-    std::string str = "Bot Soldiers: " + std::to_string(bot.getCells().size()) + "\nPlayer Soldiers: " + std::to_string(player.getCells().size());
+    //std::string str = "Bot Soldiers: " + std::to_string(bot.getCells().size()) + "\nPlayer Soldiers: " + std::to_string(player.getCells().size());
+    std::string str = "Evaluate result: " + std::to_string(Evaluate(fld));
     sf::Text text(str, font, 20);
     text.setFillColor(sf::Color::Black);//покрасили текст в красный. если убрать эту строку, то по умолчанию он белый
 
@@ -218,4 +224,11 @@ void viewStatistics(Player player, Bot bot, sf::RenderWindow& window)
     text.setStyle(sf::Text::Bold | sf::Text::Underlined);
     text.setPosition(100, 700);
     window.draw(text);
+}
+
+int Evaluate(TPlaying_Field field)
+{
+    int result = 0;
+    result = field.player->getCells().size() - field.bot->getCells().size();
+    return result;
 }

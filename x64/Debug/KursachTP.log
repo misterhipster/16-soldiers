@@ -464,4 +464,5 @@ C:\Users\georg\Desktop\KursachTP\GameField.h(412,40): warning C4244: аргум�
           [
               T=float
           ]
+C:\Users\georg\Desktop\KursachTP\main.cpp(232,76): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
   KursachTP.vcxproj -> C:\Users\georg\Desktop\KursachTP\x64\Debug\KursachTP.exe
