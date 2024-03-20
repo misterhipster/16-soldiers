@@ -6,6 +6,9 @@
 #include "Bot.h"
 #include "Direction.h"
 
+void winLost(Player, Bot, sf::RenderWindow&);
+void viewStatistics(Player, Bot, sf::RenderWindow&);
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
@@ -17,8 +20,6 @@ int main()
     int clickedPlayerCellIndex = -1;
     int clickedGamefieldCellIndex = -1;
     int clickedBotCellIndex = -1;
-    //int clickedCellX = -1;
-    //int clickedCellY = -1;
 
     while (window.isOpen())
     {
@@ -115,8 +116,6 @@ int main()
             }
         }
 
-
-
         window.clear(sf::Color::Yellow);
         gamefield.draw();
         player.draw();
@@ -150,6 +149,7 @@ int main()
             {
                 if (player.EatBot(player.getCells()[clickedPlayerCellIndex], bot.getCells()[clickedBotCellIndex], gamefield))
                 {
+                    // Игрок съел ячейку игрока, значит прааво ходить у бота не появляется
                     bot.killCell(bot.getCells()[clickedBotCellIndex]);
                     clickedPlayerCellIndex = -1;
                     clickedGamefieldCellIndex = -1;
@@ -158,7 +158,10 @@ int main()
             }
         }
 
-        // Для дебага лучше оставь ))) (я энаю что проссто никогда это не сотру :] )
+        viewStatistics(player, bot, window);
+        winLost(player, bot, window);
+
+        // Для дебага лучше оставь ))) (я энаю что просто никогда это не сотру :] )
         //if (gamefield.getBotRelativeDirection(gamefield.getCells()[0], gamefield.getCells()[1]) == Direction::Right)
         //{
         //    sf::CircleShape shape(100);
@@ -168,4 +171,51 @@ int main()
     }
 
     return 0;
+}
+
+// Определяет побеждает игрок или проигрывает, и заканчивает игру если это необходимо
+void winLost(Player player, Bot bot, sf::RenderWindow& window)
+{
+    if (bot.getCells().size() < 15 || player.getCells().size() <= 0)
+    {
+        sf::Font font;
+        font.loadFromFile("timesnewromanpsmt.ttf");
+
+        sf::Text text("Congratulations!", font, 24);;
+        if (bot.getCells().size() <= 16)
+        {
+            //text("Congratulations! You win!", font, 24);
+            text.setString(text.getString() + " You win!");
+        }
+        if (player.getCells().size() < 0)
+        {
+            //text("Congratulations! You win!", font, 24);
+            text.setString(text.getString() + " You win!");
+        }
+        text.setFillColor(sf::Color::White);
+        text.setPosition(300, 350);
+
+        window.clear();
+        window.draw(text);
+        window.display();
+        sf::sleep(sf::seconds(10));
+        window.close();
+    }
+}
+
+void viewStatistics(Player player, Bot bot, sf::RenderWindow& window)
+{
+    sf::Font font;
+    // Передаем нашему шрифту файл шрифта (этот шрифт в одной директори с проектом)
+    font.loadFromFile("timesnewromanpsmt.ttf");
+
+    // Создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+    std::string str = "Bot Soldiers: " + std::to_string(bot.getCells().size()) + "\nPlayer Soldiers: " + std::to_string(player.getCells().size());
+    sf::Text text(str, font, 20);
+    text.setFillColor(sf::Color::Black);//покрасили текст в красный. если убрать эту строку, то по умолчанию он белый
+
+    // Жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    text.setPosition(100, 700);
+    window.draw(text);
 }
