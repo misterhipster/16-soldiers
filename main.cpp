@@ -17,7 +17,7 @@ int main()
     GameField gamefield(window);
     Player player(gamefield.getCells(), window);
     Bot bot(gamefield.getCells(), window);
-    //TPlaying_Field TPlayingField(&player, &bot); // Передаем указатели на объекты
+    TPlaying_Field TPlayingField(player, bot, gamefield); // Передаем указатели на объекты
 
     // Индекс ячейки, в которую был сделан клик, изначально устанавливаем на -1
     int clickedPlayerCellIndex = -1;
@@ -134,7 +134,7 @@ int main()
             window.draw(shape);
             // -------------------------------------------------------------------------------
 
-            // Если игрок кликнул на пустую ячейку
+            // Если игрок кликнул на ячейку игрового поля
             if (clickedGamefieldCellIndex != -1)
             {
                 Cell& gamefieldCell = gamefield.getCells()[clickedGamefieldCellIndex];

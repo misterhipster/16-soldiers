@@ -6,7 +6,7 @@
 #include <random>
 #include "TPlaying_Field.h"
 #include <limits>
-#define MAX_DEPTH 10
+#define MAX_DEPTH 3
 
 class Bot
 {
@@ -16,20 +16,6 @@ private:
     sf::RenderWindow& gameWindow;
 
     int score = 0;
-
-    std::vector<Cell> getAvailableCells(GameField& gamefield)
-    {
-        std::vector<Cell> availableCells;
-        for (int i = 0; i < gamefield.getCells().size(); i++)
-        {
-            if (!gamefield.getCells()[i].IsOccuped())
-            {
-                availableCells.push_back(gamefield.getCells()[i]);
-            }
-
-        }
-        return availableCells;
-    }
 
     int getAnalogicBotCellIndex(Cell botCell)
     {
@@ -51,6 +37,33 @@ private:
     }
 
 public:
+    // getAvailableCellsGameFieldIndexes
+    std::vector<Cell> getAvailableCells(GameField& gamefield)
+    {
+        std::vector<Cell> availableCells;
+        for (int i = 0; i < gamefield.getCells().size(); i++)
+        {
+            if (!gamefield.getCells()[i].IsOccuped())
+            {
+                availableCells.push_back(gamefield.getCells()[i]);
+            }
+
+        }
+        return availableCells;
+    }
+    std::vector<int> getAvailableCellsGameFieldIndexes(GameField gamefield)
+    {
+        std::vector<int> availableIndexes;
+        for (int i = 0; i < gamefield.getCells().size(); i++)
+        {
+            if (gamefield.getCells()[i].IsOccuped())
+            {
+                availableIndexes.push_back(i);
+            }
+        }
+        return availableIndexes;
+    }
+
 
     Bot(std::vector<Cell>& gameFieldCells, sf::RenderWindow& _gameWindow) : gameWindow(_gameWindow)
     {
@@ -124,23 +137,6 @@ public:
                 break;
             }
         }
-    }
-
-    int minimax(int depth, bool isMaximizing, Player player)
-    {
-
-        if (depth == MAX_DEPTH)
-        {
-            return Evaluate(player);
-        }
-
-        if (isMaximizing)
-        {
-            int bestScore = INT_MIN;
-            // Генерация всех возможных ходов
-
-        }
-
     }
 
     // Сейчас бот просто совершает первый попавшийся ход не съедая ячейки игрока
@@ -283,9 +279,75 @@ public:
         return false;
     }
 
-    //bool TryToEat(Player player,GameField& gamefield)
-    //{
-    //    std::vector<Cell> eatebleCells = getEatebleCells(gamefield, player);
+    int MiniMax(short recursiveLevel, bool aiTurn, TPlaying_Field tPlaying_Field)
+    {
+        if (recursiveLevel == MAX_DEPTH
+            || tPlaying_Field.player.getCells().size() == 0
+            || tPlaying_Field.bot.getCells().size() == 0)
+        {
+            return tPlaying_Field.Evaluate();
+        }
+        if (aiTurn)
+        {
+            int bestEval = 10000;
+            // Дальше должна пройти симуляция всех ходов БОТА
+            std::vector<int> availableGameFieldIndexes = tPlaying_Field.bot.getAvailableCellsGameFieldIndexes(tPlaying_Field.gamefield);
+            for (int i = 0; i < availableGameFieldIndexes.size(); i++)
+            {
+                for (int j = 0; j < tPlaying_Field.bot.getCells().size(); j++)
+                {
+                    if (tPlaying_Field.bot.changePosition(tPlaying_Field.bot.getCells()[j], tPlaying_Field.gamefield.getCells()[availableGameFieldIndexes[i]], tPlaying_Field.gamefield))
+                    {
+                        int eval = MiniMax(recursiveLevel + 1, false, tPlaying_Field);
+                    }
+                }
+            }
+            for (int i = 0; i < tPlaying_Field.bot.getCells().size(); i++)
+            {
+                for (int j = 0; j < tPlaying_Field.player.getCells().size(); j++)
+                {
+                    if (tPlaying_Field.bot.EatPlayer(
+                        tPlaying_Field.bot.getCells()[i], tPlaying_Field.player.getCells()[j], tPlaying_Field.gamefield))
+                    {
+                        // Когда кто-то кого-то ест то он продолжает ходить так что передаем TRUE
+                        //MiniMax(recursiveLevel + 1, false, tPlaying_Field);
+                        tPlaying_Field.player.killCell(tPlaying_Field.player.getCells()[j]);
+                        int eval = MiniMax(recursiveLevel + 1, true, tPlaying_Field);
+                    }
+                }
+            }
+        }
+        else
+        {
 
-    //}
+            int bestEval = -10000;
+            //Bot& botik = tPlaying_Field.bot;
+            //Player& plr = tPlaying_Field.player;
+            //GameField& gmfld = tPlaying_Field.gamefield;
+            for (int i = 0; i < tPlaying_Field.player.getCells().size(); i++)
+            {
+                for (int j = 0; j < tPlaying_Field.gamefield.getCells().size(); j++)
+                {
+                    if (tPlaying_Field.player.changePosition(
+                        tPlaying_Field.player.getCells()[i], 
+                        tPlaying_Field.gamefield.getCells()[j],
+                        tPlaying_Field.gamefield))
+                    {
+                        int eval = MiniMax(recursiveLevel + 1, true, tPlaying_Field);
+
+                    }
+                }
+                for (int j = 0; j < tPlaying_Field.bot.getCells().size(); j++)
+                {
+                    if (tPlaying_Field.player.EatBot(
+                        tPlaying_Field.player.getCells()[i],
+                        tPlaying_Field.bot.getCells()[j], 
+                        tPlaying_Field.gamefield))
+                    {
+                        int eval = MiniMax(recursiveLevel + 1, false, tPlaying_Field);
+                    }
+                }
+            }
+        }
+    }
 };
