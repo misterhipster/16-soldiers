@@ -8,8 +8,8 @@
 #include "TPlaying_Field.h"
 
 void winLost(Player, Bot, sf::RenderWindow&);
-void viewStatistics(Player, Bot, sf::RenderWindow&, TPlaying_Field);
-int Evaluate(TPlaying_Field);
+void viewStatistics(Player, Bot, GameField, sf::RenderWindow&);
+int Evaluate(Player, Bot);
 
 int main()
 {
@@ -17,9 +17,7 @@ int main()
     GameField gamefield(window);
     Player player(gamefield.getCells(), window);
     Bot bot(gamefield.getCells(), window);
-    TPlaying_Field playingField(&player, &bot); // Передаем указатели на объекты
-
-
+    //TPlaying_Field TPlayingField(&player, &bot); // Передаем указатели на объекты
 
     // Индекс ячейки, в которую был сделан клик, изначально устанавливаем на -1
     int clickedPlayerCellIndex = -1;
@@ -125,25 +123,46 @@ int main()
         gamefield.draw();
         player.draw();
         bot.draw();
+        // Если игрок кликнул на свою ячейку
         if (clickedPlayerCellIndex != -1)
         {
             Cell& playerCell = player.getCells()[clickedPlayerCellIndex];
+            // -------------------------------------------------------------------------------
             sf::CircleShape shape(10);
             shape.setFillColor(sf::Color::Green);
             shape.setPosition(playerCell.GetX() + shape.getRadius(), playerCell.GetY() + shape.getRadius());
             window.draw(shape);
+            // -------------------------------------------------------------------------------
+
+            // Если игрок кликнул на пустую ячейку
             if (clickedGamefieldCellIndex != -1)
             {
                 Cell& gamefieldCell = gamefield.getCells()[clickedGamefieldCellIndex];
+                // -------------------------------------------------------------------------------
                 sf::CircleShape shape2(10);
                 shape2.setFillColor(sf::Color::White);
                 shape2.setPosition(gamefieldCell.GetX() + shape2.getRadius(), gamefieldCell.GetY() + shape2.getRadius());
                 window.draw(shape2);
+                // -------------------------------------------------------------------------------
 
                 bool flag = player.changePosition(playerCell, gamefieldCell, gamefield);
                 if (flag)
                 {
-                    bot.move(gamefield);
+                    if (bot.getEatebleCells(player, gamefield).size() != 0)
+                    {
+                        for (int i = 0; i < bot.getCells().size(); i++)
+                        {
+                            if (bot.EatPlayer(bot.getCells()[i], bot.getEatebleCells(player, gamefield)[0], gamefield))
+                            {
+                                player.killCell(bot.getEatebleCells(player, gamefield)[0]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        bot.move(gamefield);
+                    }
+
                     clickedPlayerCellIndex = -1;
                     clickedGamefieldCellIndex = -1;
                     clickedBotCellIndex = -1;
@@ -154,7 +173,7 @@ int main()
             {
                 if (player.EatBot(player.getCells()[clickedPlayerCellIndex], bot.getCells()[clickedBotCellIndex], gamefield))
                 {
-                    // Игрок съел ячейку игрока, значит прааво ходить у бота не появляется
+                    // Игрок съел ячейку игрока, значит право ходить у бота не появляется
                     bot.killCell(bot.getCells()[clickedBotCellIndex]);
                     clickedPlayerCellIndex = -1;
                     clickedGamefieldCellIndex = -1;
@@ -163,7 +182,7 @@ int main()
             }
         }
 
-        viewStatistics(player, bot, window, playingField);
+        viewStatistics(player, bot,gamefield, window);
         winLost(player, bot, window);
 
         // Для дебага лучше оставь ))) (я энаю что просто никогда это не сотру :] )
@@ -195,7 +214,7 @@ void winLost(Player player, Bot bot, sf::RenderWindow& window)
         if (player.getCells().size() <= 0)
         {
             //text("Congratulations! You win!", font, 24);
-            text.setString(text.getString() + " You win!");
+            text.setString(text.getString() + " You lose!");
         }
         text.setFillColor(sf::Color::White);
         text.setPosition(300, 350);
@@ -208,15 +227,22 @@ void winLost(Player player, Bot bot, sf::RenderWindow& window)
     }
 }
 
-void viewStatistics(Player player, Bot bot, sf::RenderWindow& window, TPlaying_Field fld)
+void viewStatistics(Player player, Bot bot, GameField gamefield, sf::RenderWindow& window)
 {
     sf::Font font;
     // Передаем нашему шрифту файл шрифта (этот шрифт в одной директори с проектом)
     font.loadFromFile("timesnewromanpsmt.ttf");
 
     // Создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
-    //std::string str = "Bot Soldiers: " + std::to_string(bot.getCells().size()) + "\nPlayer Soldiers: " + std::to_string(player.getCells().size());
-    std::string str = "Evaluate result: " + std::to_string(Evaluate(fld));
+    //std::string str = "Bot score: " + std::to_string(bot.getScore()) + "\nPlayer score: " + std::to_string(player.getScore());
+    std::string str = "bot EatebleCells: " + std::to_string(bot.getEatebleCells(player, gamefield).size());
+
+    //sf::CircleShape shape(10);
+    //shape.setPosition(x, y);
+
+    std::string str2 = "\nEvaluate result: " + std::to_string(Evaluate(player, bot));
+    str = str + str2;
+
     sf::Text text(str, font, 20);
     text.setFillColor(sf::Color::Black);//покрасили текст в красный. если убрать эту строку, то по умолчанию он белый
 
@@ -226,9 +252,9 @@ void viewStatistics(Player player, Bot bot, sf::RenderWindow& window, TPlaying_F
     window.draw(text);
 }
 
-int Evaluate(TPlaying_Field field)
+int Evaluate(Player player, Bot bot)
 {
     int result = 0;
-    result = field.player->getCells().size() - field.bot->getCells().size();
+    result = player.getCells().size() - bot.getCells().size();
     return result;
 }

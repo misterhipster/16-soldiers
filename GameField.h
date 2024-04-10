@@ -419,7 +419,16 @@ public:
             // Проверяем, совпадают ли начальная и конечная точки линии с позициями ячеек
             if ((lineStart == pos1 && lineEnd == pos2) || (lineStart == pos2 && lineEnd == pos1))
             {
-                return true;
+                float dx = fabs(lineStart.x - lineEnd.x);
+                float dy = fabs(lineStart.y - lineEnd.y);
+                float ddx = 90.0f;
+                float ddy = 90.0f;
+
+                if (dx < ddx && dy < ddy)// && dx != 0.0f && dy != 0.0f)
+                {
+                    return true;
+                }
+
             }
         }
 

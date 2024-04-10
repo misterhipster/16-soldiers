@@ -7,11 +7,12 @@
 
 class Player
 {
-    
 private:
     std::vector<int> indexes = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 31, 32, 33, 34, 35, 36 };
     std::vector<Cell> playerCells;
     sf::RenderWindow& gameWindow;
+
+    int score = 0;
 
     int getAnalogicPlayerCellIndex(Cell playerCell)
     {
@@ -38,6 +39,19 @@ private:
         return -1;
     }
 
+    std::vector<Cell> getAvailableCells(GameField& gamefield)
+    {
+        std::vector<Cell> availableCells;
+        for (int i = 0; i < gamefield.getCells().size(); i++)
+        {
+            if (!gamefield.getCells()[i].IsOccuped())
+            {
+                availableCells.push_back(gamefield.getCells()[i]);
+            }
+
+        }
+        return availableCells;
+    }
 
 public:
     Player(std::vector<Cell>& gameFieldCells, sf::RenderWindow& _gameWindow) : gameWindow(_gameWindow)
@@ -50,6 +64,13 @@ public:
             //gameFieldCells[indexes[i]].isOccuped = true;
             gameFieldCells[indexes[i]].setSelected(true);
         }
+    }
+
+    Player(const Player& player): gameWindow(player.gameWindow)
+    {
+        indexes = player.indexes;
+        playerCells = player.playerCells;
+        score = player.score;
     }
 
     void draw()
@@ -70,6 +91,7 @@ public:
         return indexes;
     }
 
+    // Смена позиции
     bool changePosition(Cell& playerCell, Cell& gameFieldNotOccupedCell, GameField& gameField)
     {
         if (!gameFieldNotOccupedCell.IsOccuped())
@@ -169,6 +191,7 @@ public:
                     gamefield.getCells()[botCellIndex].setSelected(false);
                     gamefield.getCells()[cellInDirectionLikeBotCellIndex].setSelected(true);
                     playerCells[playerCellsPlayerIndex].setPosition(cellx, celly);
+                    score++;
                     return true;
                 }
             }
@@ -176,4 +199,20 @@ public:
         return false;
     }
 
+    int getScore()
+    {
+        return score;
+    }
+
+    void killCell(Cell cell)
+    {
+        for (int i = 0; i < playerCells.size(); i++)
+        {
+            if (cell.GetX() == playerCells[i].GetX() && cell.GetY() == playerCells[i].GetY())
+            {
+                playerCells.erase(playerCells.begin()+i);
+                break;
+            }
+        }
+    }
 };
