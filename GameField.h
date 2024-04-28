@@ -390,6 +390,17 @@ public:
         fillField();
     }
 
+
+    GameField& operator=(const GameField& gmfld)
+    {
+        if (this != &gmfld)
+        {
+            this->cells = gmfld.cells;
+        }
+        //*this = gmfld;
+        return *this;
+    }
+
     void draw()
     {
         for (int i = 0; i < cells.size(); i++)
@@ -421,8 +432,8 @@ public:
             {
                 float dx = fabs(lineStart.x - lineEnd.x);
                 float dy = fabs(lineStart.y - lineEnd.y);
-                float ddx = 90.0f;
-                float ddy = 90.0f;
+                float ddx = 110.0f;
+                float ddy = 110.0f;
 
                 if (dx < ddx && dy < ddy)// && dx != 0.0f && dy != 0.0f)
                 {

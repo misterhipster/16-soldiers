@@ -1,353 +1,378 @@
-#pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <vector>
-#include "Cell.h"
-#include <random>
-#include "TPlaying_Field.h"
-#include <limits>
-#define MAX_DEPTH 3
-
-class Bot
-{
-private:
-    std::vector<int> indexes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 25, 26, 27, 28, 29, 30 };
-    std::vector<Cell> botCells;
-    sf::RenderWindow& gameWindow;
-
-    int score = 0;
-
-    int getAnalogicBotCellIndex(Cell botCell)
-    {
-        for (int i = 0; i < botCells.size(); i++)
-        {
-            if (botCell.GetX() == botCells[i].GetX() && botCell.GetY() == botCells[i].GetY())
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    int Evaluate(Player player)
-    {
-        int result = 0;
-        result = player.getCells().size() - this->getCells().size();
-        return result;
-    }
-
-public:
-    // getAvailableCellsGameFieldIndexes
-    std::vector<Cell> getAvailableCells(GameField& gamefield)
-    {
-        std::vector<Cell> availableCells;
-        for (int i = 0; i < gamefield.getCells().size(); i++)
-        {
-            if (!gamefield.getCells()[i].IsOccuped())
-            {
-                availableCells.push_back(gamefield.getCells()[i]);
-            }
-
-        }
-        return availableCells;
-    }
-    std::vector<int> getAvailableCellsGameFieldIndexes(GameField gamefield)
-    {
-        std::vector<int> availableIndexes;
-        for (int i = 0; i < gamefield.getCells().size(); i++)
-        {
-            if (gamefield.getCells()[i].IsOccuped())
-            {
-                availableIndexes.push_back(i);
-            }
-        }
-        return availableIndexes;
-    }
-
-
-    Bot(std::vector<Cell>& gameFieldCells, sf::RenderWindow& _gameWindow) : gameWindow(_gameWindow)
-    {
-        for (int i = 0; i < indexes.size(); i++)
-        {
-            Cell cell(gameFieldCells[indexes[i]].GetX(), gameFieldCells[indexes[i]].GetY());
-            cell.ChangeColor2();
-            botCells.push_back(cell);
-            //gameFieldCells[indexes[i]].isOccuped = true;
-            gameFieldCells[indexes[i]].setSelected(true);
-        }
-    }
-
-    Bot(Bot& bot) :gameWindow(bot.gameWindow)
-    {
-        indexes = bot.indexes;
-        botCells = bot.botCells;
-        score = bot.score;
-    }
-
-    std::vector<Cell> getEatebleCells(Player player, GameField gamefield)
-    {
-        std::vector<Cell> eatebleCells;
-        for (int i = 0; i < botCells.size(); i++)
-        {
-            for (int j = 0; j < player.getCells().size(); j++)
-            {
-                if (gamefield.isLineBetweenCells(botCells[i], player.getCells()[j]))
-                {
-                    eatebleCells.push_back(player.getCells()[j]);
-                }
-            }
-        }
-        return eatebleCells;
-    }
-
-
-    int getAnalogicGamefieldCellIndex(Cell cell, GameField gameField)
-    {
-        for (int i = 0; i < gameField.getCells().size(); i++)
-        {
-            if (gameField.getCells()[i].GetX() == cell.GetX() && gameField.getCells()[i].GetY() == cell.GetY())
-            {
-                //return gameField.getCells()[i];
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    void draw()
-    {
-        for (int i = 0; i < botCells.size(); i++)
-        {
-            gameWindow.draw(botCells[i].GetShape());
-        }
-    }
-
-    std::vector<Cell>& getCells()
-    {
-        return botCells;
-    }
-
-    void killCell(Cell cell)
-    {
-        for (int i = 0; i < botCells.size(); i++)
-        {
-            if (cell.GetX() == botCells[i].GetX() && cell.GetY() == botCells[i].GetY())
-            {
-                botCells.erase(botCells.begin() + i);
-                break;
-            }
-        }
-    }
-
-    // —ÂÈ˜‡Ò ·ÓÚ ÔÓÒÚÓ ÒÓ‚Â¯‡ÂÚ ÔÂ‚˚È ÔÓÔ‡‚¯ËÈÒˇ ıÓ‰ ÌÂ Ò˙Â‰‡ˇ ˇ˜ÂÈÍË Ë„ÓÍ‡
-    bool move(GameField& gameField)
-    {
-        // œÓÎÛ˜‡ÂÏ ‰ÓÒÚÛÔÌ˚Â ˇ˜ÂÈÍË
-        std::vector<Cell> availableCells = getAvailableCells(gameField);
-        bool flag = false;
-        // œÓ·Â„‡ÂÏÒˇ ÔÓ ‚ÒÂÏ ˇ˜ÂÈÍ‡Ï ·ÓÚ‡
-        for (int i = 0; i < botCells.size(); i++)
-        {
-            int gameFieldCellWhereBotIndex = getAnalogicGamefieldCellIndex(botCells[i], gameField);
-            // “ÂÔÂ¸ ÔÓ·Â„‡ÂÏÒˇ ÔÓ ‚ÒÂÏ ‰ÓÒÚÛÔÌ˚Ï ˇ˜ÂÈÍ‡Ï 
-            for (int j = 0; j < availableCells.size(); j++)
-            {
-                int availableCellIndex = getAnalogicGamefieldCellIndex(availableCells[j], gameField);
-                // ≈ÒÎË ÏÂÊ‰Û ﬂ◊≈… Œ… ¡Œ“¿ Ë ƒŒ—“”œÕŒ… ﬂ◊≈… Œ… ÂÒÚ¸ ÎËÌËˇ, ÚÓ ‰ÂÎ‡ÂÏ ıÓ‰
-                if (gameField.isLineBetweenCells(gameField.getCells()[gameFieldCellWhereBotIndex], gameField.getCells()[availableCellIndex]))
-                {
-                    botCells[i].setPosition(availableCells[j].GetX(), availableCells[j].GetY());
-                    gameField.getCells()[gameFieldCellWhereBotIndex].setSelected(false);
-                    gameField.getCells()[availableCellIndex].setSelected(true);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    int getScore()
-    {
-        return score;
-    }
-
-    //void eatPlayerCell
-    bool EatPlayer(Cell botCell, Cell playerCell, GameField& gamefield)
-    {
-        int botCellIndex = getAnalogicGamefieldCellIndex(botCell, gamefield);
-        int playerCellIndex = getAnalogicGamefieldCellIndex(playerCell, gamefield);
-
-        if (gamefield.isLineBetweenCells(gamefield.getCells()[botCellIndex], gamefield.getCells()[playerCellIndex]))
-        {
-            Direction dir = gamefield.getBotRelativeDirection(gamefield.getCells()[botCellIndex], gamefield.getCells()[playerCellIndex]);
-            // –‡ÁÌËˆ‡ ‚ ‡ÒÒÚÓˇÌËË ÏÂÊ‰Û ˇ˜ÂÈÍ‡ÏË
-            int dx = abs(gamefield.getCells()[0].GetX() - gamefield.getCells()[6].GetX());
-            int dy = abs(gamefield.getCells()[0].GetY() - gamefield.getCells()[6].GetY());
-            //  ÓÓ‰ËÌ‡Ú˚ ˇ˜ÂÈÍË ÍÓÚÓ‡ˇ Ë‰ÂÚ ÔÓÒÎÂ ˇ˜ÂÈÍË ·ÓÚ‡ ‚ ÚÓÏ ÊÂ Ì‡Ô‡‚ÎÂÌËË
-            int cellx;
-            int celly;
-            if (dir == Direction::Up)
-            {
-                cellx = playerCell.GetX();
-                celly = playerCell.GetY() - dy;
-            }
-            else if (dir == Direction::Down)
-            {
-                cellx = playerCell.GetX();
-                celly = playerCell.GetY() + dy;
-            }
-            else if (dir == Direction::Left)
-            {
-                cellx = playerCell.GetX() - dx;
-                celly = playerCell.GetY();
-            }
-            else if (dir == Direction::Right)
-            {
-                cellx = playerCell.GetX() + dx;
-                celly = playerCell.GetY();
-            }
-            else if (dir == Direction::LeftUp)
-            {
-                cellx = playerCell.GetX() - dx;
-                celly = playerCell.GetY() - dy;
-            }
-            else if (dir == Direction::RightUp)
-            {
-                cellx = playerCell.GetX() + dx;
-                celly = playerCell.GetY() - dy;
-            }
-            else if (dir == Direction::LeftDown)
-            {
-                cellx = playerCell.GetX() - dx;
-                celly = playerCell.GetY() + dy;
-            }
-            else if (dir == Direction::RightDown)
-            {
-                cellx = playerCell.GetX() + dx;
-                celly = playerCell.GetY() + dy;
-            }
-
-            // ‘ÛÛÛÛı ·Îˇˇˇ Í‡ÍÓÂ „Ó‚ÌÓ
-            Cell cellInDirectionLikeBotCell(cellx, celly);
-            int cellInDirectionLikeBotCellIndex = getAnalogicGamefieldCellIndex(cellInDirectionLikeBotCell, gamefield);
-
-            if (!gamefield.getCells()[cellInDirectionLikeBotCellIndex].IsOccuped())
-            {
-                if (gamefield.isLineBetweenCells(gamefield.getCells()[botCellIndex], gamefield.getCells()[playerCellIndex])
-                    && gamefield.isLineBetweenCells(gamefield.getCells()[playerCellIndex], gamefield.getCells()[cellInDirectionLikeBotCellIndex]))
-                {
-                    int playerCellsPlayerIndex = getAnalogicBotCellIndex(botCell);
-                    gamefield.getCells()[botCellIndex].setSelected(false);
-                    gamefield.getCells()[playerCellIndex].setSelected(false);
-                    gamefield.getCells()[cellInDirectionLikeBotCellIndex].setSelected(true);
-                    botCells[playerCellsPlayerIndex].setPosition(cellx, celly);
-                    score++;
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
-    // ﬂ ÔÓÒÚÓ ÔÂÂÍÓÔËÓ‚‡Î ˝ÚÓÚ ÏÂÚÓ‰ ËÁ ÍÎ‡ÒÒ‡ Ë„ÓÍ‡
-    bool changePosition(Cell& botCell, Cell& gameFieldNotOccupedCell, GameField& gameField)
-    {
-        if (!gameFieldNotOccupedCell.IsOccuped())
-        {
-            int botX = botCell.GetX();
-            int botY = botCell.GetY();
-            int gfnocx = gameFieldNotOccupedCell.GetX();
-            int gfnocy = gameFieldNotOccupedCell.GetY();
-            for (int i = 0; i < gameField.getCells().size(); i++)
-            {
-                if (gameField.getCells()[i].GetX() == botX && gameField.getCells()[i].GetY() == botY)
-                {
-                    if (gameField.isLineBetweenCells(gameField.getCells()[i], gameFieldNotOccupedCell))
-                    {
-                        botCell.setPosition(gfnocx, gfnocy);
-                        gameField.getCells()[i].setSelected(false);
-                        gameFieldNotOccupedCell.setSelected(true);
-                        return true;
-                        break;
-                    }
-
-                }
-            }
-            //return true;
-        }
-        return false;
-    }
-
-    int MiniMax(short recursiveLevel, bool aiTurn, TPlaying_Field tPlaying_Field)
-    {
-        if (recursiveLevel == MAX_DEPTH
-            || tPlaying_Field.player.getCells().size() == 0
-            || tPlaying_Field.bot.getCells().size() == 0)
-        {
-            return tPlaying_Field.Evaluate();
-        }
-        if (aiTurn)
-        {
-            int bestEval = 10000;
-            // ƒ‡Î¸¯Â ‰ÓÎÊÌ‡ ÔÓÈÚË ÒËÏÛÎˇˆËˇ ‚ÒÂı ıÓ‰Ó‚ ¡Œ“¿
-            std::vector<int> availableGameFieldIndexes = tPlaying_Field.bot.getAvailableCellsGameFieldIndexes(tPlaying_Field.gamefield);
-            for (int i = 0; i < availableGameFieldIndexes.size(); i++)
-            {
-                for (int j = 0; j < tPlaying_Field.bot.getCells().size(); j++)
-                {
-                    if (tPlaying_Field.bot.changePosition(tPlaying_Field.bot.getCells()[j], tPlaying_Field.gamefield.getCells()[availableGameFieldIndexes[i]], tPlaying_Field.gamefield))
-                    {
-                        int eval = MiniMax(recursiveLevel + 1, false, tPlaying_Field);
-                    }
-                }
-            }
-            for (int i = 0; i < tPlaying_Field.bot.getCells().size(); i++)
-            {
-                for (int j = 0; j < tPlaying_Field.player.getCells().size(); j++)
-                {
-                    if (tPlaying_Field.bot.EatPlayer(
-                        tPlaying_Field.bot.getCells()[i], tPlaying_Field.player.getCells()[j], tPlaying_Field.gamefield))
-                    {
-                        //  Ó„‰‡ ÍÚÓ-ÚÓ ÍÓ„Ó-ÚÓ ÂÒÚ ÚÓ ÓÌ ÔÓ‰ÓÎÊ‡ÂÚ ıÓ‰ËÚ¸ Ú‡Í ˜ÚÓ ÔÂÂ‰‡ÂÏ TRUE
-                        //MiniMax(recursiveLevel + 1, false, tPlaying_Field);
-                        tPlaying_Field.player.killCell(tPlaying_Field.player.getCells()[j]);
-                        int eval = MiniMax(recursiveLevel + 1, true, tPlaying_Field);
-                    }
-                }
-            }
-        }
-        else
-        {
-
-            int bestEval = -10000;
-            //Bot& botik = tPlaying_Field.bot;
-            //Player& plr = tPlaying_Field.player;
-            //GameField& gmfld = tPlaying_Field.gamefield;
-            for (int i = 0; i < tPlaying_Field.player.getCells().size(); i++)
-            {
-                for (int j = 0; j < tPlaying_Field.gamefield.getCells().size(); j++)
-                {
-                    if (tPlaying_Field.player.changePosition(
-                        tPlaying_Field.player.getCells()[i], 
-                        tPlaying_Field.gamefield.getCells()[j],
-                        tPlaying_Field.gamefield))
-                    {
-                        int eval = MiniMax(recursiveLevel + 1, true, tPlaying_Field);
-
-                    }
-                }
-                for (int j = 0; j < tPlaying_Field.bot.getCells().size(); j++)
-                {
-                    if (tPlaying_Field.player.EatBot(
-                        tPlaying_Field.player.getCells()[i],
-                        tPlaying_Field.bot.getCells()[j], 
-                        tPlaying_Field.gamefield))
-                    {
-                        int eval = MiniMax(recursiveLevel + 1, false, tPlaying_Field);
-                    }
-                }
-            }
-        }
-    }
-};
+Ôªø//#pragma once
+//#include <iostream>
+//#include <SFML/Graphics.hpp>
+//#include <vector>
+//#include "Cell.h"
+//#include "GameField.h"
+//#include "Direction.h"
+//#include "TPlaying_Field.h"
+//#include "TPlaying_Field.h"
+//#include "Bot.h"
+//#include <random>
+//#define MAX_DEPTH 3
+//
+//class Bot
+//{
+//private:
+//    std::vector<int> indexes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 25, 26, 27, 28, 29, 30 };
+//    std::vector<Cell> botCells;
+//    sf::RenderWindow& gameWindow;
+//
+//    int score = 0;
+//
+//    int getAnalogicBotCellIndex(Cell botCell)
+//    {
+//        for (int i = 0; i < botCells.size(); i++)
+//        {
+//            if (botCell.GetX() == botCells[i].GetX() && botCell.GetY() == botCells[i].GetY())
+//            {
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
+//
+//    int Evaluate(Player player)
+//    {
+//        int result = 0;
+//        result = player.getCells().size() - this->getCells().size();
+//        return result;
+//    }
+//
+//public:
+//    // getAvailableCellsGameFieldIndexes
+//    std::vector<Cell> getAvailableCells(GameField& gamefield)
+//    {
+//        std::vector<Cell> availableCells;
+//        for (int i = 0; i < gamefield.getCells().size(); i++)
+//        {
+//            if (!gamefield.getCells()[i].IsOccuped())
+//            {
+//                availableCells.push_back(gamefield.getCells()[i]);
+//            }
+//
+//        }
+//        return availableCells;
+//    }
+//    std::vector<int> getAvailableCellsGameFieldIndexes(GameField gamefield)
+//    {
+//        std::vector<int> availableIndexes;
+//        for (int i = 0; i < gamefield.getCells().size(); i++)
+//        {
+//            if (gamefield.getCells()[i].IsOccuped())
+//            {
+//                availableIndexes.push_back(i);
+//            }
+//        }
+//        return availableIndexes;
+//    }
+//
+//
+//    Bot(std::vector<Cell>& gameFieldCells, sf::RenderWindow& _gameWindow) : gameWindow(_gameWindow)
+//    {
+//        for (int i = 0; i < indexes.size(); i++)
+//        {
+//            Cell cell(gameFieldCells[indexes[i]].GetX(), gameFieldCells[indexes[i]].GetY());
+//            cell.ChangeColor2();
+//            botCells.push_back(cell);
+//            //gameFieldCells[indexes[i]].isOccuped = true;
+//            gameFieldCells[indexes[i]].setSelected(true);
+//        }
+//    }
+//
+//    Bot(Bot& bot) :gameWindow(bot.gameWindow)
+//    {
+//        indexes = bot.indexes;
+//        botCells = bot.botCells;
+//        score = bot.score;
+//    }
+//
+//    Bot& operator=(const Bot& otherBot)
+//    {
+//        *this = otherBot;
+//        return *this;
+//    }
+//
+//    std::vector<Cell> getEatebleCells(Player player, GameField gamefield)
+//    {
+//        std::vector<Cell> eatebleCells;
+//        for (int i = 0; i < botCells.size(); i++)
+//        {
+//            for (int j = 0; j < player.getCells().size(); j++)
+//            {
+//                if (gamefield.isLineBetweenCells(botCells[i], player.getCells()[j]))
+//                {
+//                    eatebleCells.push_back(player.getCells()[j]);
+//                }
+//            }
+//        }
+//        return eatebleCells;
+//    }
+//
+//
+//    int getAnalogicGamefieldCellIndex(Cell cell, GameField gameField)
+//    {
+//        for (int i = 0; i < gameField.getCells().size(); i++)
+//        {
+//            if (gameField.getCells()[i].GetX() == cell.GetX() && gameField.getCells()[i].GetY() == cell.GetY())
+//            {
+//                //return gameField.getCells()[i];
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
+//
+//    void draw()
+//    {
+//        for (int i = 0; i < botCells.size(); i++)
+//        {
+//            gameWindow.draw(botCells[i].GetShape());
+//        }
+//    }
+//
+//    std::vector<Cell>& getCells()
+//    {
+//        return botCells;
+//    }
+//
+//    void killCell(Cell cell)
+//    {
+//        for (int i = 0; i < botCells.size(); i++)
+//        {
+//            if (cell.GetX() == botCells[i].GetX() && cell.GetY() == botCells[i].GetY())
+//            {
+//                botCells.erase(botCells.begin() + i);
+//                break;
+//            }
+//        }
+//    }
+//
+//    // –°–µ–π—á–∞—Å –±–æ—Ç –ø—Ä–æ—Å—Ç–æ —Å–æ–≤–µ—Ä—à–∞–µ—Ç –ø–µ—Ä–≤—ã–π –ø–æ–ø–∞–≤—à–∏–π—Å—è —Ö–æ–¥ –Ω–µ —Å—ä–µ–¥–∞—è —è—á–µ–π–∫–∏ –∏–≥—Ä–æ–∫–∞
+//    bool move(GameField& gameField)
+//    {
+//        // –ü–æ–ª—É—á–∞–µ–º –¥–æ—Å—Ç—É–ø–Ω—ã–µ —è—á–µ–π–∫–∏
+//        std::vector<Cell> availableCells = getAvailableCells(gameField);
+//        bool flag = false;
+//        // –ü—Ä–æ–±–µ–≥–∞–µ–º—Å—è –ø–æ –≤—Å–µ–º —è—á–µ–π–∫–∞–º –±–æ—Ç–∞
+//        for (int i = 0; i < botCells.size(); i++)
+//        {
+//            int gameFieldCellWhereBotIndex = getAnalogicGamefieldCellIndex(botCells[i], gameField);
+//            // –¢–µ–ø–µ—Ä—å –ø—Ä–æ–±–µ–≥–∞–µ–º—Å—è –ø–æ –≤—Å–µ–º –¥–æ—Å—Ç—É–ø–Ω—ã–º —è—á–µ–π–∫–∞–º 
+//            for (int j = 0; j < availableCells.size(); j++)
+//            {
+//                int availableCellIndex = getAnalogicGamefieldCellIndex(availableCells[j], gameField);
+//                // –ï—Å–ª–∏ –º–µ–∂–¥—É –Ø–ß–ï–ô–ö–û–ô –ë–û–¢–ê –∏ –î–û–°–¢–£–ü–ù–û–ô –Ø–ß–ï–ô–ö–û–ô –µ—Å—Ç—å –ª–∏–Ω–∏—è, —Ç–æ –¥–µ–ª–∞–µ–º —Ö–æ–¥
+//                if (gameField.isLineBetweenCells(gameField.getCells()[gameFieldCellWhereBotIndex], gameField.getCells()[availableCellIndex]))
+//                {
+//                    botCells[i].setPosition(availableCells[j].GetX(), availableCells[j].GetY());
+//                    gameField.getCells()[gameFieldCellWhereBotIndex].setSelected(false);
+//                    gameField.getCells()[availableCellIndex].setSelected(true);
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//
+//    int getScore()
+//    {
+//        return score;
+//    }
+//
+//    //void eatPlayerCell
+//    bool EatPlayer(Cell botCell, Cell playerCell, GameField& gamefield)
+//    {
+//        int botCellIndex = getAnalogicGamefieldCellIndex(botCell, gamefield);
+//        int playerCellIndex = getAnalogicGamefieldCellIndex(playerCell, gamefield);
+//
+//        if (gamefield.isLineBetweenCells(gamefield.getCells()[botCellIndex], gamefield.getCells()[playerCellIndex]))
+//        {
+//            Direction dir = gamefield.getBotRelativeDirection(gamefield.getCells()[botCellIndex], gamefield.getCells()[playerCellIndex]);
+//            // –†–∞–∑–Ω–∏—Ü–∞ –≤ —Ä–∞—Å—Å—Ç–æ—è–Ω–∏–∏ –º–µ–∂–¥—É —è—á–µ–π–∫–∞–º–∏
+//            int dx = abs(gamefield.getCells()[0].GetX() - gamefield.getCells()[6].GetX());
+//            int dy = abs(gamefield.getCells()[0].GetY() - gamefield.getCells()[6].GetY());
+//            // –ö–æ–æ—Ä–¥–∏–Ω–∞—Ç—ã —è—á–µ–π–∫–∏ –∫–æ—Ç–æ—Ä–∞—è –∏–¥–µ—Ç –ø–æ—Å–ª–µ —è—á–µ–π–∫–∏ –±–æ—Ç–∞ –≤ —Ç–æ–º –∂–µ –Ω–∞–ø—Ä–∞–≤–ª–µ–Ω–∏–∏
+//            int cellx;
+//            int celly;
+//            if (dir == Direction::Up)
+//            {
+//                cellx = playerCell.GetX();
+//                celly = playerCell.GetY() - dy;
+//            }
+//            else if (dir == Direction::Down)
+//            {
+//                cellx = playerCell.GetX();
+//                celly = playerCell.GetY() + dy;
+//            }
+//            else if (dir == Direction::Left)
+//            {
+//                cellx = playerCell.GetX() - dx;
+//                celly = playerCell.GetY();
+//            }
+//            else if (dir == Direction::Right)
+//            {
+//                cellx = playerCell.GetX() + dx;
+//                celly = playerCell.GetY();
+//            }
+//            else if (dir == Direction::LeftUp)
+//            {
+//                cellx = playerCell.GetX() - dx;
+//                celly = playerCell.GetY() - dy;
+//            }
+//            else if (dir == Direction::RightUp)
+//            {
+//                cellx = playerCell.GetX() + dx;
+//                celly = playerCell.GetY() - dy;
+//            }
+//            else if (dir == Direction::LeftDown)
+//            {
+//                cellx = playerCell.GetX() - dx;
+//                celly = playerCell.GetY() + dy;
+//            }
+//            else if (dir == Direction::RightDown)
+//            {
+//                cellx = playerCell.GetX() + dx;
+//                celly = playerCell.GetY() + dy;
+//            }
+//
+//            // –§—É—É—É—É—Ö –±–ª—è—è—è –∫–∞–∫–æ–µ –≥–æ–≤–Ω–æ
+//            Cell cellInDirectionLikeBotCell(cellx, celly);
+//            int cellInDirectionLikeBotCellIndex = getAnalogicGamefieldCellIndex(cellInDirectionLikeBotCell, gamefield);
+//
+//            if (!gamefield.getCells()[cellInDirectionLikeBotCellIndex].IsOccuped())
+//            {
+//                if (gamefield.isLineBetweenCells(gamefield.getCells()[botCellIndex], gamefield.getCells()[playerCellIndex])
+//                    && gamefield.isLineBetweenCells(gamefield.getCells()[playerCellIndex], gamefield.getCells()[cellInDirectionLikeBotCellIndex]))
+//                {
+//                    int playerCellsPlayerIndex = getAnalogicBotCellIndex(botCell);
+//                    gamefield.getCells()[botCellIndex].setSelected(false);
+//                    gamefield.getCells()[playerCellIndex].setSelected(false);
+//                    gamefield.getCells()[cellInDirectionLikeBotCellIndex].setSelected(true);
+//                    botCells[playerCellsPlayerIndex].setPosition(cellx, celly);
+//                    score++;
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//
+//
+//    // –Ø –ø—Ä–æ—Å—Ç–æ –ø–µ—Ä–µ–∫–æ–ø–∏—Ä–æ–≤–∞–ª —ç—Ç–æ—Ç –º–µ—Ç–æ–¥ –∏–∑ –∫–ª–∞—Å—Å–∞ –∏–≥—Ä–æ–∫–∞
+//    bool changePosition(Cell& botCell, Cell& gameFieldNotOccupedCell, GameField& gameField)
+//    {
+//        if (!gameFieldNotOccupedCell.IsOccuped())
+//        {
+//            int botX = botCell.GetX();
+//            int botY = botCell.GetY();
+//            int gfnocx = gameFieldNotOccupedCell.GetX();
+//            int gfnocy = gameFieldNotOccupedCell.GetY();
+//            for (int i = 0; i < gameField.getCells().size(); i++)
+//            {
+//                if (gameField.getCells()[i].GetX() == botX && gameField.getCells()[i].GetY() == botY)
+//                {
+//                    if (gameField.isLineBetweenCells(gameField.getCells()[i], gameFieldNotOccupedCell))
+//                    {
+//                        botCell.setPosition(gfnocx, gfnocy);
+//                        gameField.getCells()[i].setSelected(false);
+//                        gameFieldNotOccupedCell.setSelected(true);
+//                        return true;
+//                        break;
+//                    }
+//
+//                }
+//            }
+//            //return true;
+//        }
+//        return false;
+//    }
+//
+//    int MiniMax(short recursiveLevel, bool aiTurn, TPlaying_Field tPlaying_Field)
+//    {
+//        if (recursiveLevel == MAX_DEPTH
+//            || tPlaying_Field.player.getCells().size() == 0
+//            || tPlaying_Field.bot.getCells().size() == 0)
+//        {
+//            return tPlaying_Field.Evaluate();
+//        }
+//        if (aiTurn)
+//        {
+//            int bestEval = 10000;
+//            int eval;
+//            // –î–∞–ª—å—à–µ –¥–æ–ª–∂–Ω–∞ –ø—Ä–æ–π—Ç–∏ —Å–∏–º—É–ª—è—Ü–∏—è –≤—Å–µ—Ö —Ö–æ–¥–æ–≤ –ë–û–¢–ê
+//            std::vector<int> availableGameFieldIndexes = tPlaying_Field.bot.getAvailableCellsGameFieldIndexes(tPlaying_Field.gamefield);
+//            for (int i = 0; i < availableGameFieldIndexes.size(); i++)
+//            {
+//                for (int j = 0; j < tPlaying_Field.bot.getCells().size(); j++)
+//                {
+//                    if (tPlaying_Field.bot.changePosition(tPlaying_Field.bot.getCells()[j], tPlaying_Field.gamefield.getCells()[availableGameFieldIndexes[i]], tPlaying_Field.gamefield))
+//                    {
+//                        int eval = MiniMax(recursiveLevel + 1, false, tPlaying_Field);
+//                    }
+//                }
+//            }
+//            for (int i = 0; i < tPlaying_Field.bot.getCells().size(); i++)
+//            {
+//                for (int j = 0; j < tPlaying_Field.player.getCells().size(); j++)
+//                {
+//                    if (tPlaying_Field.bot.EatPlayer(
+//                        tPlaying_Field.bot.getCells()[i], tPlaying_Field.player.getCells()[j], tPlaying_Field.gamefield))
+//                    {
+//                        // –ö–æ–≥–¥–∞ –∫—Ç–æ-—Ç–æ –∫–æ–≥–æ-—Ç–æ –µ—Å—Ç —Ç–æ –æ–Ω –ø—Ä–æ–¥–æ–ª–∂–∞–µ—Ç —Ö–æ–¥–∏—Ç—å —Ç–∞–∫ —á—Ç–æ –ø–µ—Ä–µ–¥–∞–µ–º TRUE
+//                        //MiniMax(recursiveLevel + 1, false, tPlaying_Field);
+//                        tPlaying_Field.player.killCell(tPlaying_Field.player.getCells()[j]);
+//                        eval = MiniMax(recursiveLevel + 1, true, tPlaying_Field);
+//                    }
+//                }
+//            }
+//            if (eval > bestEval)// eval > bestEval)
+//            {
+//                bestEval = eval;
+//            }
+//            return bestEval;
+//        }
+//        else
+//        {
+//            int bestEval = -10000;
+//            int eval;
+//            //Bot& botik = tPlaying_Field.bot;
+//            //Player& plr = tPlaying_Field.player;
+//            //GameField& gmfld = tPlaying_Field.gamefield;
+//            for (int i = 0; i < tPlaying_Field.player.getCells().size(); i++)
+//            {
+//                for (int j = 0; j < tPlaying_Field.gamefield.getCells().size(); j++)
+//                {
+//                    if (tPlaying_Field.player.changePosition(
+//                        tPlaying_Field.player.getCells()[i],
+//                        tPlaying_Field.gamefield.getCells()[j],
+//                        tPlaying_Field.gamefield))
+//                    {
+//                        int eval = MiniMax(recursiveLevel + 1, true, tPlaying_Field);
+//                    }
+//                }
+//                for (int j = 0; j < tPlaying_Field.bot.getCells().size(); j++)
+//                {
+//                    if (tPlaying_Field.player.EatBot(
+//                        tPlaying_Field.player.getCells()[i],
+//                        tPlaying_Field.bot.getCells()[j],
+//                        tPlaying_Field.gamefield))
+//                    {
+//                        int eval = MiniMax(recursiveLevel + 1, false, tPlaying_Field);
+//                    }
+//                }
+//            }
+//            if (eval < bestEval)
+//            {
+//                bestEval = eval;
+//            }
+//            return bestEval;
+//        }
+//    }
+//
+//
+//    void doBestMoveByMinimax(TPlaying_Field tplayingField)
+//    {
+//        return;
+//    }
+//};

@@ -9,7 +9,6 @@ class Player
 {
 private:
     std::vector<int> indexes = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 31, 32, 33, 34, 35, 36 };
-    std::vector<Cell> playerCells;
     sf::RenderWindow& gameWindow;
 
     int score = 0;
@@ -54,6 +53,7 @@ private:
     }
 
 public:
+    std::vector<Cell> playerCells;
     Player(std::vector<Cell>& gameFieldCells, sf::RenderWindow& _gameWindow) : gameWindow(_gameWindow)
     {
         for (int i = 0; i < indexes.size(); i++)
@@ -66,11 +66,20 @@ public:
         }
     }
 
-    Player(const Player& player): gameWindow(player.gameWindow)
+    Player(Player& player): gameWindow(player.gameWindow)
     {
         indexes = player.indexes;
         playerCells = player.playerCells;
         score = player.score;
+    }
+
+    Player& operator=(const Player& otherPlayer)
+    {
+        if (this != &otherPlayer)
+        { 
+            this->playerCells = otherPlayer.playerCells;
+        }
+        return *this;
     }
 
     void draw()
@@ -104,8 +113,17 @@ public:
             {
                 if (gameField.getCells()[i].GetX() == px && gameField.getCells()[i].GetY() == py)
                 {
-
-                    if (gameField.isLineBetweenCells(gameField.getCells()[i], gameFieldNotOccupedCell))
+                    //for (int i = 0; i < indexes.size(); i++)
+                    //{
+                    //    Cell cell(gameFieldCells[indexes[i]].GetX(), gameFieldCells[indexes[i]].GetY());
+                    //    cell.ChangeColor1();
+                    //    playerCells.push_back(cell);
+                    //    //gameFieldCells[indexes[i]].isOccuped = true;
+                    //    gameFieldCells[indexes[i]].setSelected(true);
+                    //}
+                    if (gameField.isLineBetweenCells(gameField.getCells()[i], gameFieldNotOccupedCell)
+                        || playerCell.GetX() == gameField.getCells()[indexes[7]].GetX()
+                        || playerCell.GetY() == gameField.getCells()[indexes[7]].GetY())
                     {
                         playerCell.setPosition(gfnocx, gfnocy);
                         gameField.getCells()[i].setSelected(false);

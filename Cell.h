@@ -13,6 +13,7 @@ private:
     bool isOccuped = false;
 
 public:
+    bool cellIsToEat;
 
     Cell(int x, int y) : x(x), y(y)
     {

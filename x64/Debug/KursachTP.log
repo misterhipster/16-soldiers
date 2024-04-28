@@ -1,26 +1,9 @@
-﻿  delete.cpp
-C:\Users\georg\Desktop\KursachTP\delete.cpp(4,50): error C2061: синтаксическая ошибка: идентификатор "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\delete.cpp(7,21): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(13,17): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(13,43): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(22,38): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(22,28): error C3861: Evaluate: идентификатор не найден
-C:\Users\georg\Desktop\KursachTP\delete.cpp(27,66): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(31,22): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(35,22): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(43,33): error C2061: синтаксическая ошибка: идентификатор "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\delete.cpp(46,27): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(49,17): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(49,43): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(51,49): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(52,22): error C2065: field: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\delete.cpp(54,22): error C2065: field: необъявленный идентификатор
-  main.cpp
-C:\Users\georg\Desktop\KursachTP\Cell.h(19,31): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\georg\Desktop\KursachTP\Cell.h(21,30): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\georg\Desktop\KursachTP\Cell.h(21,27): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\georg\Desktop\KursachTP\Cell.h(74,37): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\georg\Desktop\KursachTP\Cell.h(74,34): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+﻿  main.cpp
+C:\Users\georg\Desktop\KursachTP\Cell.h(20,31): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(22,30): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(22,27): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(75,37): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Cell.h(75,34): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
 C:\Users\georg\Desktop\KursachTP\GameField.h(103,94): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
@@ -461,53 +444,31 @@ C:\Users\georg\Desktop\KursachTP\GameField.h(370,65): warning C4244: аргум�
           [
               T=float
           ]
-C:\Users\georg\Desktop\KursachTP\GameField.h(411,74): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\GameField.h(422,74): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\georg\Desktop\KursachTP\GameField.h(411,40): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\GameField.h(422,40): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\georg\Desktop\KursachTP\GameField.h(412,74): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\GameField.h(423,74): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\georg\Desktop\KursachTP\GameField.h(412,40): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\GameField.h(423,40): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(10,9): error C3646: bot: неизвестный спецификатор переопределения
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(10,12): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(14,30): error C2061: синтаксическая ошибка: идентификатор "Bot"
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(14,71): error C2065: b: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(14,85): error C2065: gmfld: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(14,67): error C2614: TPlaying_Field: недопустимая инициализация члена: "bot" не является базовым классом или членом
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(19,45): error C2065: bot: необъявленный идентификатор
-C:\Users\georg\Desktop\KursachTP\Bot.h(35,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\georg\Desktop\KursachTP\Bot.h(292,31): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(303,73): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(306,52): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(308,40): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(308,74): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(317,48): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(321,40): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(322,40): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(336,41): error C2039: "bot": не является членом "TPlaying_Field".
-C:\Users\georg\Desktop\KursachTP\TPlaying_Field.h(6): message : см. объявление "TPlaying_Field"
-C:\Users\georg\Desktop\KursachTP\Bot.h(336,24): error C2530: botik: ссылки должны быть инициализированы
-C:\Users\georg\Desktop\KursachTP\main.cpp(20,56): error C2661: TPlaying_Field::TPlaying_Field: нет перегруженной функции, принимающей 3 аргументов
-C:\Users\georg\Desktop\KursachTP\main.cpp(258,62): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-  Создание кода...
+C:\Users\georg\Desktop\KursachTP\Bot2.h(37,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\Bot2.h(416,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\main.cpp(280,62): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\main.cpp(536,13): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\main.cpp(556,28): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\main.cpp(556,22): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\georg\Desktop\KursachTP\main.cpp(413): warning C4715: doBestMoveByUsingMinimax: значение возвращается не при всех путях выполнения
+  KursachTP.vcxproj -> C:\Users\georg\Desktop\KursachTP\x64\Debug\KursachTP.exe

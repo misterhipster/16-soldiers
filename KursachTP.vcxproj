@@ -143,16 +143,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="delete.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bot.h" />
+    <ClInclude Include="Bot2.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="GameField.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="StateOfTheGame.h" />
+    <ClInclude Include="TPlaying_Field%28delete%29.h" />
     <ClInclude Include="TPlaying_Field.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

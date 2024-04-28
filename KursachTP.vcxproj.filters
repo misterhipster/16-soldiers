@@ -18,9 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="delete.cpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameField.h">
@@ -32,16 +29,19 @@
     <ClInclude Include="Player.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Bot.h">
+    <ClInclude Include="Direction.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Direction.h">
+    <ClInclude Include="TPlaying_Field%28delete%29.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="TPlaying_Field.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="StateOfTheGame.h">
+    <ClInclude Include="Bot.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Bot2.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

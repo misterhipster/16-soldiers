@@ -1,22 +1,21 @@
-#pragma once
-#include "Player.h" 
-#include "Bot.h" 
-
-// Этот класс хранит состояние игры
-class TPlaying_Field
-{
-public:
-    Player player ;
-    Bot bot;
-    GameField gamefield;
-
-    // Конструктор класса
-    TPlaying_Field(Player p, Bot b, GameField gmfld) : player(p), bot(b), gamefield(gmfld) {}
-
-    int Evaluate()
-    {
-        int result = 0;
-        result = player.getCells().size() - bot.getCells().size();
-        return result;
-    }
-};
+//#pragma once
+////#include "Player.h"
+//#include "Bot2.h"
+//
+//class TPlaying_Field
+//{
+//public:
+//    Bot bot;
+//    Player player;
+//    GameField gamefield;
+//
+//    TPlaying_Field(Player player, Bot bot, GameField gamefield) : player(player), bot(bot), gamefield(gamefield) {}
+//
+//    int Evaluate()
+//    {
+//        int result = 0;
+//        result = player.getCells().size() - bot.getCells().size();
+//        return result;
+//    }
+//
+//};
